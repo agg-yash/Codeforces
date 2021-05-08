@@ -18,18 +18,18 @@ using namespace std;
 #define PI 3.1415926535897932384626
 #define mod             1000000007
 #define inf             1e18
-typedef pair<int, int>	pii;
-typedef pair<ll, ll>	pl;
-typedef vector<int>		vi;
-typedef vector<ll>		vl;
-typedef vector<pii>		vpii;
-typedef vector<pl>		vpl;
-typedef vector<vi>		vvi;
-typedef vector<vl>		vvl;
+typedef pair<int, int>  pii;
+typedef pair<ll, ll>  pl;
+typedef vector<int>    vi;
+typedef vector<ll>    vl;
+typedef vector<pii>    vpii;
+typedef vector<pl>    vpl;
+typedef vector<vi>    vvi;
+typedef vector<vl>    vvl;
 mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 int rng(int lim) {
-	uniform_int_distribution<int> uid(0,lim-1);
-	return uid(rang);
+  uniform_int_distribution<int> uid(0,lim-1);
+  return uid(rang);
 }
 
 
@@ -52,42 +52,58 @@ void c_p_c()
 void solve() {
 
   int i,j;
-  ll n,k,mini(inf), maxi(-1);cin>>n>>k;
-  ll arr[n];
+ bool flag= true;
+  ll n,x,su(0);
+  cin>>n;
+  string s1,s2;
+  vi v1;
+  vi v2;
+  
   fo(i,n)
   {
-  	cin>>arr[i];
-  	mini=min(mini,arr[i]);
-  	maxi= max(maxi, arr[i]); 
-  }
+    cin>>x;
+    if (x>0)
+    {
+      v1.pb(x);
+      flag=true;
+    }
+    if (x<0)
+    {
 
-  if (maxi-mini-1>k-1)
+      v2.pb(-1*x);
+      flag=false;
+    }
+    su+=x;
+    
+  }
+  if (su>0)
   {
-  	cout<<"NO\n";
-  	return ;
+    cout<<"first";
+    return ;
   }
-else
-{
-	cout<<"YES\n";
-	for ( i = 0; i <n; ++i)
-	{
-		int x=1;
-		for ( j = 1; j <=arr[i]; ++j)
-		{
-			if (j<=mini+1)
-			{
-				cout<<"1"<<" ";
-			}
-			else
-			{
-				x++;
-				cout<<x<<" ";
-			}
-		}
-		cout<<"\n";
+  if (su<0)
+  {
+    cout<<"second";
+    return;
+  }
+  
+    if (v1>v2)
+    {
+      cout<<"first";
+      return;
+    }
+    else if (v2>v1)
+    {
+      cout<<"second";
+      return;
+    }
 
-	}
+if (flag)
+{
+  cout<<"first";
+  return;
 }
+  cout<<"second";
   
   
 
@@ -98,7 +114,7 @@ int main() {
    c_p_c();
 
     int t = 1;
-   
+    
     while(t--) {
       solve();
     }
