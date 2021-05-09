@@ -28,7 +28,7 @@ typedef vector<vi>    vvi;
 typedef vector<vl>    vvl;
 mt19937_64 rang(chrono::high_resolution_clock::now().time_since_epoch().count());
 int rng(int lim) {
-  uniform_int_distribution<int> uid(0,lim-1);
+  uniform_int_distribution<int> uid(0, lim - 1);
   return uid(rang);
 }
 
@@ -39,10 +39,10 @@ int rng(int lim) {
 
 void c_p_c()
 {
-    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+  ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 #ifndef ONLINE_JUDGE
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
+  freopen("input.txt", "r", stdin);
+  freopen("output.txt", "w", stdout);
 #endif
 }
 
@@ -51,75 +51,45 @@ void c_p_c()
 
 void solve() {
 
-  int i,j;
- bool flag= true;
-  ll n,x,su(0);
-  cin>>n;
-  string s1,s2;
-  vi v1;
-  vi v2;
-  
-  fo(i,n)
-  {
-    cin>>x;
-    if (x>0)
-    {
-      v1.pb(x);
-      flag=true;
-    }
-    if (x<0)
-    {
+  int i, j;
+  ll n, m; cin >> n >> m;
 
-      v2.pb(-1*x);
-      flag=false;
-    }
-    su+=x;
-    
-  }
-  if (su>0)
+  ll arr[n];
+  ll br[m];
+  fo(i, n)
   {
-    cout<<"first";
-    return ;
+    cin >> arr[i];
   }
-  if (su<0)
+  fo(i, m)
   {
-    cout<<"second";
-    return;
+    cin >> br[i];
   }
-  
-    if (v1>v2)
+  sort(arr, arr + n, greater<int>());
+  sort(br, br + m, greater<int>());
+  ll pos = 0;
+  ll ans = n;
+  for ( i = 0; i < n && pos < m  ; ++i)
+  {
+    if (arr[i] <= br[pos])
     {
-      cout<<"first";
-      return;
+      pos++;
+      ans--;
     }
-    else if (v2>v1)
-    {
-      cout<<"second";
-      return;
-    }
-
-if (flag)
-{
-  cout<<"first";
-  return;
-}
-  cout<<"second";
-  
-  
-
+  }
+  cout << ans;
 }
 
 int main() {
-  
-   c_p_c();
 
-    int t = 1;
-    
-    while(t--) {
-      solve();
-    }
+  c_p_c();
 
-    return 0;
+  int t = 1;
+
+  while (t--) {
+    solve();
+  }
+
+  return 0;
 }
 
 
