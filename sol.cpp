@@ -1,9 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define gc getchar_unlocked
-#define fo(i,n) for(i=0;i<n;i++)
 #define Fo(i,k,n) for(i=k;k<n?i<n:i>n;k<n?i+=1:i-=1)
 #define ll long long
+#define fo(i,n) for(ll i=0;i<n;i++)
 #define deb(x) cout << #x << "=" << x << endl
 #define deb2(x, y) cout << #x << "=" << x << "," << #y << "=" << y << endl
 #define pb push_back
@@ -50,30 +50,36 @@ void c_p_c()
 
 
 void solve() {
-
-	int i, j;
-	ll n ; cin >> n;
-	double area(0);
-	ll arr[n + 10];
+	ll n, m, x, y; cin >> n >> m;
+	set<int> st;
 	fo(i, n)
 	{
-		cin >> arr[i];
+		st.insert(i + 1);
 	}
-	sort(arr, arr + n, greater<int>());
 
-	fo(i, n - 1)
+	fo(i, m)
 	{
-		area += arr[i] * arr[i] - arr[i + 1] * arr[i + 1];
-		i++;
-
+		cin >> x >> y;
+		if (st.find(x) != st.end())
+		{
+			st.erase(x);
+		}
+		if (st.find(y) != st.end())
+		{
+			st.erase(y);
+		}
 	}
 
-	if (n % 2 != 0)
+	ll val = *st.begin();
+
+	cout << n - 1 << "\n";
+	for (int i = 1; i <= n ; ++i)
 	{
-		area += arr[n - 1] * arr[n - 1];
+		if (i != val)
+		{
+			cout << val << " " << i << "\n";
+		}
 	}
-
-	cout << ps(PI * area, 10);
 
 }
 
