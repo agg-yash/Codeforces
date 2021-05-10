@@ -52,42 +52,28 @@ void c_p_c()
 void solve() {
 
 	int i, j;
-	ll n;
-	cin >> n;
-	ll arr[n];
+	ll n ; cin >> n;
+	double area(0);
+	ll arr[n + 10];
 	fo(i, n)
 	{
 		cin >> arr[i];
 	}
-	ll starti(0), endi(2);
-	if (n == 1 || n == 2)
+	sort(arr, arr + n, greater<int>());
+
+	fo(i, n - 1)
 	{
-		cout << n;
-		return;
+		area += arr[i] * arr[i] - arr[i + 1] * arr[i + 1];
+		i++;
+
 	}
 
-	ll ans = 2;
-
-	while (endi <= n - 1)
+	if (n % 2 != 0)
 	{
-		if (arr[endi] == arr[endi - 1] + arr[endi - 2] )
-		{
-			ans = max(ans, endi - starti + 1);
-			endi += 1;
-
-		}
-		else
-		{
-
-			starti = endi - 1;
-			endi += 1;
-		}
-
+		area += arr[n - 1] * arr[n - 1];
 	}
-	cout << ans;
 
-
-
+	cout << ps(PI * area, 10);
 
 }
 
