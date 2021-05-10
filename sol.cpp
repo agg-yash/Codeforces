@@ -50,37 +50,50 @@ void c_p_c()
 
 
 void solve() {
-	ll n, m, x, y; cin >> n >> m;
-	set<int> st;
+	ll n, m; cin >> n >> m;
+
+	char arr[n][m];
 	fo(i, n)
 	{
-		st.insert(i + 1);
+		fo(j, m)
+		{
+			cin >> arr[i][j];
+		}
 	}
 
-	fo(i, m)
+	ll count(0);
+	fo(i, n)
 	{
-		cin >> x >> y;
-		if (st.find(x) != st.end())
+		fo(j, m)
 		{
-			st.erase(x);
-		}
-		if (st.find(y) != st.end())
-		{
-			st.erase(y);
+			if (arr[i][j] == 'P')
+			{
+				if (arr[i + 1][j] == 'W' && i + 1 < n)
+				{
+					arr[i + 1][j] = 'A';
+					count++;
+				}
+				else if (arr[i - 1][j] == 'W' && i - 1 > -1)
+				{
+					arr[i - 1][j] = 'A';
+					count++;
+				}
+				else if (arr[i][j + 1] == 'W' && j + 1 < m)
+				{
+					arr[i][j + 1] = 'A';
+					count++;
+				}
+				else if (arr[i][j - 1] == 'W' && j - 1 > -1)
+				{
+					arr[i][j - 1] = 'A';
+					count++;
+				}
+				arr[i][j] == 'A';
+			}
 		}
 	}
 
-	ll val = *st.begin();
-
-	cout << n - 1 << "\n";
-	for (int i = 1; i <= n ; ++i)
-	{
-		if (i != val)
-		{
-			cout << val << " " << i << "\n";
-		}
-	}
-
+	cout << count;
 }
 
 int main() {
@@ -95,6 +108,8 @@ int main() {
 
 	return 0;
 }
+
+
 
 
 
