@@ -50,74 +50,40 @@ void c_p_c()
 
 
 void solve() {
-
-	ll d, sumtime, summin(0), summax(0), x, y;
-	cin >> d >> sumtime;
+	ll n;
+	cin >> n;
 	vpii v;
-	ll ans[d + 10];
-	fo(i, d)
+	fo(i, n)
 	{
+		ll x, y;
 		cin >> x >> y;
 		v.pb(mp(x, y));
-		summax += y;
-		summin += x;
 	}
 
-	if (summax < sumtime   || summin > sumtime )
-	{
-		cout << "NO\n";
-		return;
-	}
-	else
-	{
+	string s;
 
-		cout << "YES\n";
-		if (d == 1)
+
+	ll currenta(0), currentb(0);
+	fo(i, n)
+	{
+		if (currenta + v[i].F - currentb <= 500   )
 		{
-			cout << sumtime;
+			currenta += v[i].F;
+			s.pb('A');
+		}
+		else if (currentb + v[i].S - currenta <= 500 )
+		{
+			currentb += v[i].S;
+			s.pb('G');
+		}
+		else
+		{
+			cout << "-1";
 			return;
 		}
-
-
-
-		int cnt(0);
-		fo(i, d)
-		{
-			ans[i] = v[i].F;
-			cnt += ans[i];
-		}
-
-
-
-		for (int j = 0; cnt != sumtime ; )
-		{
-			if (ans[j] + 1 <= v[j].S )
-			{
-				ans[j] += 1;
-				cnt += 1;
-
-			}
-
-			j = (j + 1) % d;
-		}
-
-
-		fo(i, d)
-		{
-			cout << ans[i] << " ";
-		}
-
-
-
-
-
 	}
 
-
-
-
-
-
+	cout << s;
 
 }
 
