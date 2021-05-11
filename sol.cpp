@@ -50,40 +50,35 @@ void c_p_c()
 
 
 void solve() {
-	ll n;
-	cin >> n;
-	vpii v;
-	fo(i, n)
-	{
-		ll x, y;
-		cin >> x >> y;
-		v.pb(mp(x, y));
-	}
 
 	string s;
-
-
-	ll currenta(0), currentb(0);
-	fo(i, n)
+	int four(0), seven(0);
+	cin >> s;
+	fo(i, s.length())
 	{
-		if (currenta + v[i].F - currentb <= 500   )
+		if (s[i] == '4')
 		{
-			currenta += v[i].F;
-			s.pb('A');
+			four++;
 		}
-		else if (currentb + v[i].S - currenta <= 500 )
+		if (s[i] == '7')
 		{
-			currentb += v[i].S;
-			s.pb('G');
-		}
-		else
-		{
-			cout << "-1";
-			return;
+			seven++;
 		}
 	}
 
-	cout << s;
+	if (four == seven && four == 0)
+	{
+		cout << "-1";
+		return;
+	}
+	else if (four == seven || four > seven)
+	{
+		cout << "4";
+	}
+	else
+	{
+		cout << "7";
+	}
 
 }
 
