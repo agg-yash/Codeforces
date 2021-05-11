@@ -51,40 +51,55 @@ void c_p_c()
 
 void solve() {
 
-	ll n, mx(INT_MIN); cin >> n;
-	vpii v;
+	ll n, m, d; cin >> n >> m >> d;
+	ll arr[n][m];
+	ll ans[n * m + 10];
+	ll a, k(0);
 
 	fo(i, n)
 	{
-		ll x, y; cin >> x >> y;
-
-		v.pb(mp(y, x));
-		mx = max(x, mx);
+		fo(j, m)
+		{
+			cin >> arr[i][j];
+			ans[k] = arr[i][j];
+			k++;
+		}
 	}
-	sort(v.rbegin(), v.rend());
 
-	ll cards = v[0].F ;
-
-
-
-
-	if (cards == 0)
+	a = arr[0][0] % d;
+	k = m * n;
+	fo(i, n)
 	{
-		cout << mx;
-		return;
+		fo(j, m)
+		{
+			if (arr[i][j] % d != a)
+			{
+				cout << "-1";
+				return;
+			}
+		}
 	}
 
-	ll points = v[0].S;
 
-	for (ll i = 1;   cards != 0 && i < n ; ++i)
+	sort(ans, ans + k);
+
+	ll mid = k / 2 ;
+	ll moves(0);
+	swap(ans[0], ans[mid]);
+
+	for (int i = 1; i < k; ++i)
 	{
-		cards += v[i].F;
-		points += v[i].S;
-		cards--;
-
+		int diff = abs(ans[0] - ans[i]) ;
+		moves = moves + diff / d;
 	}
 
-	cout << points;
+	cout << moves;
+
+
+
+
+
+
 
 
 
