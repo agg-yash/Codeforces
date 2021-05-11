@@ -51,34 +51,44 @@ void c_p_c()
 
 void solve() {
 
-	string s;
-	int four(0), seven(0);
-	cin >> s;
-	fo(i, s.length())
-	{
-		if (s[i] == '4')
-		{
-			four++;
-		}
-		if (s[i] == '7')
-		{
-			seven++;
-		}
-	}
+	ll n, mx(INT_MIN); cin >> n;
+	vpii v;
 
-	if (four == seven && four == 0)
+	fo(i, n)
 	{
-		cout << "-1";
+		ll x, y; cin >> x >> y;
+
+		v.pb(mp(y, x));
+		mx = max(x, mx);
+	}
+	sort(v.rbegin(), v.rend());
+
+	ll cards = v[0].F ;
+
+
+
+
+	if (cards == 0)
+	{
+		cout << mx;
 		return;
 	}
-	else if (four == seven || four > seven)
+
+	ll points = v[0].S;
+
+	for (ll i = 1;   cards != 0 && i < n ; ++i)
 	{
-		cout << "4";
+		cards += v[i].F;
+		points += v[i].S;
+		cards--;
+
 	}
-	else
-	{
-		cout << "7";
-	}
+
+	cout << points;
+
+
+
+
 
 }
 
