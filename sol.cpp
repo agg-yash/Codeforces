@@ -50,50 +50,75 @@ void c_p_c()
 
 
 void solve() {
-	ll n, m; cin >> n >> m;
 
-	char arr[n][m];
-	fo(i, n)
+	ll d, sumtime, summin(0), summax(0), x, y;
+	cin >> d >> sumtime;
+	vpii v;
+	ll ans[d + 10];
+	fo(i, d)
 	{
-		fo(j, m)
-		{
-			cin >> arr[i][j];
-		}
+		cin >> x >> y;
+		v.pb(mp(x, y));
+		summax += y;
+		summin += x;
 	}
 
-	ll count(0);
-	fo(i, n)
+	if (summax < sumtime   || summin > sumtime )
 	{
-		fo(j, m)
+		cout << "NO\n";
+		return;
+	}
+	else
+	{
+
+		cout << "YES\n";
+		if (d == 1)
 		{
-			if (arr[i][j] == 'P')
+			cout << sumtime;
+			return;
+		}
+
+
+
+		int cnt(0);
+		fo(i, d)
+		{
+			ans[i] = v[i].F;
+			cnt += ans[i];
+		}
+
+
+
+		for (int j = 0; cnt != sumtime ; )
+		{
+			if (ans[j] + 1 <= v[j].S )
 			{
-				if (arr[i + 1][j] == 'W' && i + 1 < n)
-				{
-					arr[i + 1][j] = 'A';
-					count++;
-				}
-				else if (arr[i - 1][j] == 'W' && i - 1 > -1)
-				{
-					arr[i - 1][j] = 'A';
-					count++;
-				}
-				else if (arr[i][j + 1] == 'W' && j + 1 < m)
-				{
-					arr[i][j + 1] = 'A';
-					count++;
-				}
-				else if (arr[i][j - 1] == 'W' && j - 1 > -1)
-				{
-					arr[i][j - 1] = 'A';
-					count++;
-				}
-				arr[i][j] == 'A';
+				ans[j] += 1;
+				cnt += 1;
+
 			}
+
+			j = (j + 1) % d;
 		}
+
+
+		fo(i, d)
+		{
+			cout << ans[i] << " ";
+		}
+
+
+
+
+
 	}
 
-	cout << count;
+
+
+
+
+
+
 }
 
 int main() {
@@ -108,8 +133,6 @@ int main() {
 
 	return 0;
 }
-
-
 
 
 
