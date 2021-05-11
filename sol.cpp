@@ -51,48 +51,27 @@ void c_p_c()
 
 void solve() {
 
-	ll n, k; cin >> n >> k;
-	ll arr[n + 10];
-	fo(i, n)
+	ll n; cin >> n;
+	vi v;
+
+	ll i = 2;
+	v.pb(n);
+	while (n != 1)
 	{
-		cin >> arr[i];
-	}
-
-
-	ll min_sum(INT_MAX);
-
-
-	ll i(0), mini_index(0);
-
-	while (i != k )
-	{
-		ll index = i, sum(0);
-
-		do
+		if (n % i == 0)
 		{
-			sum += arr[index];
-			index = (index + k) % n;
-
-		} while (index != i);
-
-		if (min_sum > sum)
-		{
-			min_sum = sum;
-			mini_index = i;
+			n = n / i;
+			v.pb(n);
+			i = 1;
 		}
-
 		i++;
 
 	}
 
-
-
-
-	cout << mini_index + 1;
-
-
-
-
+	for (int i = 0; i < v.size(); ++i)
+	{
+		cout << v[i] << " ";
+	}
 
 }
 
