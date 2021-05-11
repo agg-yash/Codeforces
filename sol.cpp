@@ -51,55 +51,44 @@ void c_p_c()
 
 void solve() {
 
-	ll n, m, d; cin >> n >> m >> d;
-	ll arr[n][m];
-	ll ans[n * m + 10];
-	ll a, k(0);
-
+	ll n, k; cin >> n >> k;
+	ll arr[n + 10];
 	fo(i, n)
 	{
-		fo(j, m)
-		{
-			cin >> arr[i][j];
-			ans[k] = arr[i][j];
-			k++;
-		}
+		cin >> arr[i];
 	}
 
-	a = arr[0][0] % d;
-	k = m * n;
-	fo(i, n)
+
+	ll min_sum(INT_MAX);
+
+
+	ll i(0), mini_index(0);
+
+	while (i != k )
 	{
-		fo(j, m)
+		ll index = i, sum(0);
+
+		do
 		{
-			if (arr[i][j] % d != a)
-			{
-				cout << "-1";
-				return;
-			}
+			sum += arr[index];
+			index = (index + k) % n;
+
+		} while (index != i);
+
+		if (min_sum > sum)
+		{
+			min_sum = sum;
+			mini_index = i;
 		}
+
+		i++;
+
 	}
 
 
-	sort(ans, ans + k);
-
-	ll mid = k / 2 ;
-	ll moves(0);
-	swap(ans[0], ans[mid]);
-
-	for (int i = 1; i < k; ++i)
-	{
-		int diff = abs(ans[0] - ans[i]) ;
-		moves = moves + diff / d;
-	}
-
-	cout << moves;
 
 
-
-
-
-
+	cout << mini_index + 1;
 
 
 
