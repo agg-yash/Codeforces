@@ -51,27 +51,32 @@ void c_p_c()
 
 void solve() {
 
-	ll n; cin >> n;
-	vi v;
-
-	ll i = 2;
-	v.pb(n);
-	while (n != 1)
+	ll n, xi, yi; cin >> n >> xi >> yi;
+	ll count(0);
+	vpii v;
+	set<pii> st;
+	fo(i, n)
 	{
-		if (n % i == 0)
-		{
-			n = n / i;
-			v.pb(n);
-			i = 1;
-		}
-		i++;
+		ll x, y;
+		cin >> x >> y;
 
+		ll num = yi - y;
+		ll deno = xi - x;
+		ll hcf = __gcd(num, deno);
+		num = num / hcf;
+		deno = deno / hcf;
+		st.insert(mp(num, deno));
 	}
 
-	for (int i = 0; i < v.size(); ++i)
-	{
-		cout << v[i] << " ";
-	}
+	cout << st.size();
+
+
+
+
+
+
+
+
 
 }
 
