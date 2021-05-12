@@ -50,34 +50,28 @@ void c_p_c()
 
 
 void solve() {
-
-	ll n, xi, yi; cin >> n >> xi >> yi;
-	ll count(0);
-	vpii v;
-	set<pii> st;
-	fo(i, n)
+	string hav;
+	string fav;
+	cin >> hav >> fav;
+	fo(i, fav.length())
 	{
-		ll x, y;
-		cin >> x >> y;
-
-		ll num = yi - y;
-		ll deno = xi - x;
-		ll hcf = __gcd(num, deno);
-		num = num / hcf;
-		deno = deno / hcf;
-		st.insert(mp(num, deno));
+		if ( hav.find(fav[i]) == string::npos)
+		{
+			cout << "-1";
+			return;
+		}
 	}
 
-	cout << st.size();
+	ll ans(0);
+	for (char c = 'a'; c <= 'z'; ++c)
+	{
+		ll countf = count(fav.begin(), fav.end(), c);
+		ll counth = count(hav.begin(), hav.end(), c);
+		ans += min(counth, countf);
 
+	}
 
-
-
-
-
-
-
-
+	cout << ans;
 }
 
 int main() {
